@@ -24,7 +24,7 @@ RUN \
   #touch /etc/pgbouncer/userlist.txt && \
   addgroup -g 70 -S postgres 2>/dev/null && \
   adduser -u 70 -S -D -H -h /var/lib/postgresql -g "Postgres user" -s /bin/sh -G postgres postgres  && \
-  echo "TeStP_w0rD" | passwd postgres --stdin && \
+  echo -e "TeStP_wOr1\nTeStP_wOr1" | passwd postgres && \
   chown -R postgres /var/run/pgbouncer /etc/pgbouncer && \
   # Cleanup
   cd /tmp && \
