@@ -30,6 +30,8 @@ RUN \
   rm -rf /tmp/pgbouncer*  && \
   apk del --purge autoconf autoconf-doc automake udns-dev curl gcc libc-dev libevent-dev libtool make libressl-dev pkgconfig
 
+COPY userlist.txt  /etc/pgbouncer/userlist.txt
+COPY pgbouncer.ini /etc/pgbouncer/pgbouncer.ini
 COPY entrypoint.sh /entrypoint.sh
 USER postgres
 EXPOSE 5432
