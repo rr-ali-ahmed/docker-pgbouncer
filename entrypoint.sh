@@ -43,9 +43,9 @@ _AUTH_FILE="${AUTH_FILE:-$PG_CONFIG_DIR/userlist.txt}"
 
 # Workaround userlist.txt missing issue
 # https://github.com/edoburu/docker-pgbouncer/issues/33
-if [ ! -e "${_AUTH_FILE}" ]; then
-  touch "${_AUTH_FILE}"
-fi
+#if [ ! -e "${_AUTH_FILE}" ]; then
+#  touch "${_AUTH_FILE}"
+#fi
 
 if [ -n "$DB_USER" -a -n "$DB_PASSWORD" -a -e "${_AUTH_FILE}" ] && ! grep -q "^\"$DB_USER\"" "${_AUTH_FILE}"; then
   if [ "$AUTH_TYPE" != "plain" ]; then
@@ -53,8 +53,8 @@ if [ -n "$DB_USER" -a -n "$DB_PASSWORD" -a -e "${_AUTH_FILE}" ] && ! grep -q "^\
   else
      pass="$DB_PASSWORD"
   fi
- # echo "\"$DB_USER\" \"$pass\"" >> ${PG_CONFIG_DIR}/userlist.txt
- # echo "Wrote authentication credentials to ${PG_CONFIG_DIR}/userlist.txt"
+   echo "\"$DB_USER\" \"$pass\"" # >> ${PG_CONFIG_DIR}/userlist.txt
+   echo "Wrote authentication credentials to ${PG_CONFIG_DIR}/userlist.txt"
 fi
 
 if [ ! -f ${PG_CONFIG_DIR}/pgbouncer.ini ]; then
@@ -150,8 +150,9 @@ ${TCP_KEEPIDLE:+tcp_keepidle = ${TCP_KEEPIDLE}\n}\
 ${TCP_KEEPINTVL:+tcp_keepintvl = ${TCP_KEEPINTVL}\n}\
 ${TCP_USER_TIMEOUT:+tcp_user_timeout = ${TCP_USER_TIMEOUT}\n}\
 ################## end file ##################
-" > ${PG_CONFIG_DIR}/pgbouncer.ini
+" # > ${PG_CONFIG_DIR}/pgbouncer.ini
 cat ${PG_CONFIG_DIR}/pgbouncer.ini
+cat ${PG_CONFIG_DIR}/userlist.txt
 echo "Starting $*..."
 fi
 
