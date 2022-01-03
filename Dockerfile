@@ -34,7 +34,9 @@ RUN \
 COPY userlist.txt  /etc/pgbouncer/userlist.txt
 COPY pgbouncer.ini /etc/pgbouncer/pgbouncer.ini
 COPY entrypoint.sh /entrypoint.sh
-RUN ls /etc/pgbouncer
+RUN ls /etc/pgbouncer && \
+    cat /etc/pgbouncer/pgbouncer.ini && \
+    cat /etc/pgbouncer/userlist.txt      
 USER postgres
 EXPOSE 5432
 ENTRYPOINT ["/entrypoint.sh"]
