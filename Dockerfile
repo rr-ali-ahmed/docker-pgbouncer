@@ -23,16 +23,18 @@ RUN \
   cp etc/userlist.txt /etc/pgbouncer/userlist.txt.example && \
   #touch /etc/pgbouncer/userlist.txt && \
   addgroup -g 70 -S postgres 2>/dev/null && \
-  adduser -u 70 -S -D -H -h /var/lib/postgresql -g "Postgres user" -p abc123 -s /bin/sh -G postgres postgres  && \
+  adduser -u 70 -S -D -H -h /var/lib/postgresql -g "Postgres user" -s /bin/sh -G postgres postgres  && \
   chown -R postgres /var/run/pgbouncer /etc/pgbouncer && \
   # Cleanup
   cd /tmp && \
   rm -rf /tmp/pgbouncer*  && \
+  ls /etc/pgbouncer && \
   apk del --purge autoconf autoconf-doc automake udns-dev curl gcc libc-dev libevent-dev libtool make libressl-dev pkgconfig
 
 COPY userlist.txt  /etc/pgbouncer/userlist.txt
 COPY pgbouncer.ini /etc/pgbouncer/pgbouncer.ini
 COPY entrypoint.sh /entrypoint.sh
+RUN ls /etc/pgbouncer
 USER postgres
 EXPOSE 5432
 ENTRYPOINT ["/entrypoint.sh"]
