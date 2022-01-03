@@ -53,8 +53,8 @@ if [ -n "$DB_USER" -a -n "$DB_PASSWORD" -a -e "${_AUTH_FILE}" ] && ! grep -q "^\
   else
      pass="$DB_PASSWORD"
   fi
-  echo "\"$DB_USER\" \"$pass\"" >> ${PG_CONFIG_DIR}/userlist.txt
-  echo "Wrote authentication credentials to ${PG_CONFIG_DIR}/userlist.txt"
+ # echo "\"$DB_USER\" \"$pass\"" >> ${PG_CONFIG_DIR}/userlist.txt
+ # echo "Wrote authentication credentials to ${PG_CONFIG_DIR}/userlist.txt"
 fi
 
 if [ ! -f ${PG_CONFIG_DIR}/pgbouncer.ini ]; then
